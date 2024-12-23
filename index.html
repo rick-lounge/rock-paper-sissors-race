@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors Rock Race!</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
     <header>
@@ -14,20 +14,24 @@
     <main>
         <!-- Landing Page -->
         <section id="home">
-            <button id="start-btn">Play</button>
-            <button id="how-to-play-btn">How to Play</button>
-        </section>
-
-        <!-- How to Play Instructions -->
-        <section id="instructions" style="display: none;">
-            <h2>How to Play</h2>
-            <p>
-                1. Select your car.<br>
-                2. Play Rock Paper Scissors against the AI.<br>
-                3. Each win moves your car forward on the track.<br>
-                4. First to win 10 rounds wins the race!
-            </p>
-            <button id="back-btn">Back</button>
+            <video autoplay muted loop id="background-video">
+                <source src="media/landing-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div id="landing-content">
+                <button id="start-btn">Play</button>
+                <button id="how-to-play-btn">How to Play</button>
+            </div>
+            <div id="instructions" style="display: none;">
+                <h2>How to Play</h2>
+                <p>
+                    1. Select your car.<br>
+                    2. Play Rock Paper Scissors against the AI.<br>
+                    3. Each win moves your car forward on the track.<br>
+                    4. First to win 10 rounds wins the race!
+                </p>
+                <button id="back-btn">Back</button>
+            </div>
         </section>
 
         <!-- Setup Section -->
