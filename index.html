@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Rock Race!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Rock Paper Scissors Rock Race!</h1>
+    </header>
+    <main>
+        <section id="setup">
+            <h2>Choose Your Car</h2>
+            <div id="car-selection">
+                <img src="images/vehicles/car-1.svg" alt="Car 1" class="car-option" data-car="car-1">
+                <img src="images/vehicles/car-2.svg" alt="Car 2" class="car-option" data-car="car-2">
+                <img src="images/vehicles/car-3.svg" alt="Car 3" class="car-option" data-car="car-3">
+                <img src="images/vehicles/car-4.svg" alt="Car 4" class="car-option" data-car="car-4">
+                <img src="images/vehicles/car-5.svg" alt="Car 5" class="car-option" data-car="car-5">
+                <img src="images/vehicles/car-6.svg" alt="Car 6" class="car-option" data-car="car-6">
+            </div>
+            <button id="start-game">Start Game</button>
+        </section>
+        <section id="game" style="display: none;">
+            <h2>Rock Paper Scissors</h2>
+            <div id="choices">
+                <img src="images/choices/rock-left.png" alt="Rock" class="rps-option" data-choice="rock">
+                <img src="images/choices/paper-left.png" alt="Paper" class="rps-option" data-choice="paper">
+                <img src="images/choices/scissors-left.png" alt="Scissors" class="rps-option" data-choice="scissors">
+            </div>
+            <div id="race-track">
+                <img src="images/background.jpg" alt="Race Track Background" id="road">
+                <div id="player-car" class="car"></div>
+                <div id="ai-car" class="car"></div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
