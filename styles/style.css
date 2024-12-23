@@ -1,0 +1,94 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}
+
+h1 {
+    margin: 0;
+}
+
+/* Setup Section */
+#car-selection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 10px; /* Spacing between items */
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 300px; /* Limit the width of the grid */
+}
+
+#car-selection img {
+    width: 80px; /* Smaller car size */
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+#car-selection img:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+#car-selection img.selected {
+    border-color: #007BFF;
+}
+
+/* Game Section */
+#choices img {
+    width: 80px;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s;
+}
+
+#choices img:hover {
+    transform: scale(1.1);
+}
+
+#choices img.selected {
+    border-color: #007BFF;
+}
+
+/* Race Track */
+#race-track {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    background-image: url('images/race-background.png');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    border: 2px solid #333;
+}
+
+.car {
+    position: absolute;
+    width: 80px;
+    top: 65%; /* Adjusted for road alignment */
+    transform: translateY(-50%);
+    transition: left 0.5s ease-in-out;
+}
+
+#player-car {
+    left: 10%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#ai-car {
+    left: 10%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 75%; /* Slightly below player car */
+}

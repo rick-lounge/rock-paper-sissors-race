@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors Rock Race!</title>
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,6 +12,25 @@
         <h1>Rock Paper Scissors Rock Race!</h1>
     </header>
     <main>
+        <!-- Landing Page -->
+        <section id="home">
+            <button id="start-btn">Play</button>
+            <button id="how-to-play-btn">How to Play</button>
+        </section>
+
+        <!-- How to Play Instructions -->
+        <section id="instructions" style="display: none;">
+            <h2>How to Play</h2>
+            <p>
+                1. Select your car.<br>
+                2. Play Rock Paper Scissors against the AI.<br>
+                3. Each win moves your car forward on the track.<br>
+                4. First to win 10 rounds wins the race!
+            </p>
+            <button id="back-btn">Back</button>
+        </section>
+
+        <!-- Setup Section -->
         <section id="setup">
             <h2>Choose Your Car</h2>
             <div id="car-selection">
@@ -23,6 +43,8 @@
             </div>
             <button id="start-game">Start Game</button>
         </section>
+
+        <!-- Game Section -->
         <section id="game" style="display: none;">
             <h2>Rock Paper Scissors</h2>
             <div id="choices">
