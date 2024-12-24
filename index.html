@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Rock Race!</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+15&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <main>
+        <!-- Landing Page -->
+        <section id="home">
+            <video autoplay muted loop id="background-video">
+                <source src="media/landing-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div id="landing-content">
+                <h1>Rock Paper Scissors Race!</h1>
+                <button id="start-btn">Play</button>
+                <button id="how-to-play-btn">How to Play</button>
+            </div>
+            <div id="instructions" style="display: none;">
+                <h2>How to Play</h2>
+                <p>
+                    1. Select your car.<br>
+                    2. Play Rock Paper Scissors against the AI.<br>
+                    3. Each win moves your car forward on the track.<br>
+                    4. First to win 10 rounds wins the race!
+                </p>
+                <button id="back-btn">Back</button>
+            </div>
+        </section>
+
+        <!-- Setup Section -->
+        <section id="setup" style="display: none;">
+            <h2>Choose Your Car</h2>
+            <div id="car-selection">
+                <img src="images/vehicles/car-1.svg" alt="Car 1" class="car-option" data-car="car-1">
+                <img src="images/vehicles/car-2.svg" alt="Car 2" class="car-option" data-car="car-2">
+                <img src="images/vehicles/car-3.svg" alt="Car 3" class="car-option" data-car="car-3">
+                <img src="images/vehicles/car-4.svg" alt="Car 4" class="car-option" data-car="car-4">
+                <img src="images/vehicles/car-5.svg" alt="Car 5" class="car-option" data-car="car-5">
+                <img src="images/vehicles/car-6.svg" alt="Car 6" class="car-option" data-car="car-6">
+            </div>
+            <button id="start-game">Start Game</button>
+        </section>
+
+        <!-- Game Section -->
+        <section id="game" style="display: none;">
+            <div id="choices">
+                <img src="images/choices/rock-left.png" alt="Rock" class="rps-option" data-choice="rock">
+                <img src="images/choices/paper-left.png" alt="Paper" class="rps-option" data-choice="paper">
+                <img src="images/choices/scissor-left.png" alt="Scissor" class="rps-option" data-choice="scissor">
+            </div>
+            <div id="race-track">
+                <img src="images/bg/game-background.jpg" alt="Race Track Background" id="road">
+                <div id="player-car" class="car"></div>
+                <div id="ai-car" class="car"></div>
+            </div>
+        </section>
+    </main>
+    <script src="script/script.js"></script>
+</body>
+</html>
