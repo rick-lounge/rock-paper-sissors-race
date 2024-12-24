@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors Rock Race!</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+15&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <header>
-        <h1>Rock Paper Scissors Rock Race!</h1>
-    </header>
     <main>
         <!-- Landing Page -->
         <section id="home">
@@ -19,6 +20,7 @@
                 Your browser does not support the video tag.
             </video>
             <div id="landing-content">
+                <h1>Rock Paper Scissors Race!</h1>
                 <button id="start-btn">Play</button>
                 <button id="how-to-play-btn">How to Play</button>
             </div>
@@ -35,7 +37,7 @@
         </section>
 
         <!-- Setup Section -->
-        <section id="setup">
+        <section id="setup" style="display: none;">
             <h2>Choose Your Car</h2>
             <div id="car-selection">
                 <img src="images/vehicles/car-1.svg" alt="Car 1" class="car-option" data-car="car-1">
@@ -50,19 +52,18 @@
 
         <!-- Game Section -->
         <section id="game" style="display: none;">
-            <h2>Rock Paper Scissors</h2>
             <div id="choices">
                 <img src="images/choices/rock-left.png" alt="Rock" class="rps-option" data-choice="rock">
                 <img src="images/choices/paper-left.png" alt="Paper" class="rps-option" data-choice="paper">
-                <img src="images/choices/scissors-left.png" alt="Scissors" class="rps-option" data-choice="scissors">
+                <img src="images/choices/scissor-left.png" alt="Scissor" class="rps-option" data-choice="scissor">
             </div>
             <div id="race-track">
-                <img src="images/background.jpg" alt="Race Track Background" id="road">
+                <img src="images/bg/game-background.jpg" alt="Race Track Background" id="road">
                 <div id="player-car" class="car"></div>
                 <div id="ai-car" class="car"></div>
             </div>
         </section>
     </main>
-    <script src="script.js"></script>
+    <script src="script/script.js"></script>
 </body>
 </html>
