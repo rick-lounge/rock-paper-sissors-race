@@ -50,8 +50,9 @@ carOptions.forEach((car) => {
         // Add 'selected' class to the clicked car
         car.classList.add('selected');
 
-        // Log the selected car for debugging
-        console.log(`Car selected: ${car.dataset.car}`);
+        // Update selectedCar with the car's data-car value
+        selectedCar = car.dataset.car;
+        console.log(`Car selected: ${selectedCar}`); // Debugging output
     });
 });
 

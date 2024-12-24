@@ -155,13 +155,14 @@ h2, button {
 }
 
 #car-selection img:hover {
-    transform: scale(1.1);
+    transform: scale(1.3);
 }
 
 #car-selection img.selected {
     border-color: #171c22;
-    background-color: rgba(0, 0, 0, 0.1); /* Light background to highlight */
-
+    background-color: rgba(0, 0, 0, 0.1); /* Highlight background */
+    transform: scale(1.3); /* Keeps the enlarged size */
+    transition: transform 0.01s ease-in-out; /* Smooth transition */
 }
 
 /* Game Section */
