@@ -17,6 +17,10 @@ let selectedCar = null; // Stores the player's selected car
 let playerWins = 0;
 let aiWins = 0;
 
+// Capture Player's Name
+const playerNameInput = document.getElementById('player-name');
+let playerName = ''; // Store the player's name
+
 // Handle "Play" Button Click
 startBtn.addEventListener('click', () => {
     console.log('Play button clicked.');
@@ -50,20 +54,29 @@ carOptions.forEach((car) => {
         // Add 'selected' class to the clicked car
         car.classList.add('selected');
 
-        // Log the selected car for debugging
-        console.log(`Car selected: ${car.dataset.car}`);
+        // Update selectedCar with the car's data-car value
+        selectedCar = car.dataset.car;
+        console.log(`Car selected: ${selectedCar}`); // Debugging output
     });
 });
 
 // Start Game
 startGameBtn.addEventListener('click', () => {
+    playerName = document.getElementById('player-name').value.trim(); // Get and trim player's name input
+
+    if (!playerName) {
+        console.log('Player name is missing.');
+        alert('Please enter your name!');
+        return;
+    }
+
     if (!selectedCar) {
         console.log('No car selected. Prompting user to select a car.');
         alert('Please select a car!');
         return;
     }
 
-    console.log(`Starting game with player's car: ${selectedCar}`);
+    console.log(`Starting game with player: ${playerName} and car: ${selectedCar}`);
     setupSection.style.display = 'none'; // Hide the setup section
     gameSection.style.display = 'block'; // Show the game section
 
@@ -74,7 +87,24 @@ startGameBtn.addEventListener('click', () => {
     const randomCarIndex = Math.floor(Math.random() * carOptions.length) + 1;
     aiCar.style.backgroundImage = `url('images/vehicles/car-${randomCarIndex}.svg')`;
     console.log(`AI assigned car: car-${randomCarIndex}`);
+    
+    // Display Player and AI Names
+    displayNames();
 });
+
+
+// Display Player and AI Names
+function displayNames() {
+    const playerNameDisplay = document.createElement('div');
+    playerNameDisplay.id = 'player-name-display';
+    playerNameDisplay.textContent = `${playerName}`;
+    playerCar.appendChild(playerNameDisplay);
+
+    const aiNameDisplay = document.createElement('div');
+    aiNameDisplay.id = 'ai-name-display';
+    aiNameDisplay.textContent = 'Computer';
+    aiCar.appendChild(aiNameDisplay);
+}
 
 // Rock Paper Scissors Logic
 document.querySelectorAll('.rps-option').forEach((option) => {
