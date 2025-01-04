@@ -185,12 +185,30 @@ h2, button {
 }
 
 /* Game Section */
+#game {
+    position: relative; /* Ensure elements can be positioned absolutely */
+    overflow: hidden;  /* Prevent scrollbars */
+    z-index: 1;
+}
+
+/* Choices */
+#choices {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    position: absolute; /* Overlay the background */
+    top: 5%; /* Position at the top of the game section */
+    z-index: 3; /* Above the background, but below other overlays */
+    width: 100%;
+}
+
 #choices img {
-    width: 80px;
+    width: 90px; /* Keep original size */
     margin: 10px;
     cursor: pointer;
     border: 2px solid transparent;
     transition: transform 0.2s;
+    z-index: 3; /* Above background */
 }
 
 #choices img:hover {
@@ -198,7 +216,27 @@ h2, button {
 }
 
 #choices img.selected {
-    border-color: #007BFF;
+    border-color: #007BFF; /* Highlight selected choice */
+}
+
+/* Chosen Hands Display */
+#player-hand-display,
+#ai-hand-display {
+    position: absolute; /* Overlay on the race track */
+    width: 200px; /* Smaller size for chosen hands */
+    height: auto;
+    object-fit: contain;
+    z-index: 2; /* Above cars but below choices */
+}
+
+#player-hand-display {
+    top: 30%; /* Adjust position relative to race track */
+    left: 25%; /* Align on the left side */
+}
+
+#ai-hand-display {
+    top: 30%; /* Adjust position relative to race track */
+    right: 25%; /* Align on the right side */
 }
 
 /* Race Track */
@@ -207,22 +245,23 @@ h2, button {
     width: 100vw;
     height: 100vh;
     margin: 0;
+    z-index: 0; /* Background layer */
 }
 
 #road {
-    display: block; 
-    max-width: 100%; 
-    max-height: 100vh; 
-    width: auto; 
-    height: auto; 
-    margin: 0 auto; 
+    display: block;
+    max-width: 100%;
+    max-height: 100vh;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
 }
 
 .car {
     position: absolute;
     width: 100px;
     height: 100px;
-    top: 65%; /* Align cars on the road */
+    top: 82%; /* Align cars on the road */
     transform: translateY(-50%);
     background-size: contain; /* Fit the SVGs properly */
     background-repeat: no-repeat; /* Avoid tiling */
@@ -239,5 +278,29 @@ h2, button {
     left: 10%;
     background-size: contain;
     background-repeat: no-repeat;
-    top: 75%; /* Slightly below player car */
+    top: 82%; /* Slightly below player car */
+}
+
+#finish-line {
+    position: absolute;
+    top: 81%; /* Adjust based on track layout */
+    left: 88%; /* Position between 10th and 11th sets */
+    transform: translateY(-50%);
+    width: 80px; /* Adjust size */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1; /* Ensure it overlays the background but under cars */
+}
+
+#winner-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 40px;
+    border-radius: 10px;
+    z-index: 5;
+    font-family: 'Jersey 15', serif;
 }

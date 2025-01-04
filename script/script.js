@@ -17,66 +17,64 @@ let selectedCar = null; // Stores the player's selected car
 let playerWins = 0;
 let aiWins = 0;
 
+// Total sets for the game
+const totalSets = 10;
+
 // Capture Player's Name
 const playerNameInput = document.getElementById('player-name');
 let playerName = ''; // Store the player's name
 
+// RPS Options and State
+const rpsOptions = document.querySelectorAll('.rps-option');
+let playerChoice = null; // Stores the player's choice
+let aiChoice = null; // Stores the AI's choice
+
+// Hands Display
+const playerHandDisplay = document.createElement('img');
+const aiHandDisplay = document.createElement('img');
+playerHandDisplay.id = 'player-hand-display';
+aiHandDisplay.id = 'ai-hand-display';
+
 // Handle "Play" Button Click
 startBtn.addEventListener('click', () => {
-    console.log('Play button clicked.');
     homeSection.style.display = 'none'; // Hide the home section
     setupSection.style.display = 'block'; // Show the setup section
-    console.log('Navigated to setup section.');
 });
 
 // Handle "How to Play" Button Click
 howToPlayBtn.addEventListener('click', () => {
-    console.log('How to Play button clicked.');
     landingContent.style.display = 'none'; // Hide Play and How to Play buttons
     instructions.style.display = 'block'; // Show the instructions overlay
-    console.log('Instructions displayed.');
 });
 
 // Handle "Back" Button Click
 backBtn.addEventListener('click', () => {
-    console.log('Back button clicked.');
     instructions.style.display = 'none'; // Hide instructions
     landingContent.style.display = 'flex'; // Show Play and How to Play buttons
-    console.log('Returned to landing page content.');
 });
 
 // Car Selection
 carOptions.forEach((car) => {
     car.addEventListener('click', () => {
-        // Remove 'selected' class from all cars
         carOptions.forEach((c) => c.classList.remove('selected'));
-
-        // Add 'selected' class to the clicked car
         car.classList.add('selected');
-
-        // Update selectedCar with the car's data-car value
-        selectedCar = car.dataset.car;
-        console.log(`Car selected: ${selectedCar}`); // Debugging output
+        selectedCar = car.dataset.car; // Update selectedCar
     });
 });
 
 // Start Game
 startGameBtn.addEventListener('click', () => {
-    playerName = document.getElementById('player-name').value.trim(); // Get and trim player's name input
+    playerName = playerNameInput.value.trim(); // Get and trim player's name input
 
     if (!playerName) {
-        console.log('Player name is missing.');
         alert('Please enter your name!');
         return;
     }
-
     if (!selectedCar) {
-        console.log('No car selected. Prompting user to select a car.');
         alert('Please select a car!');
         return;
     }
 
-    console.log(`Starting game with player: ${playerName} and car: ${selectedCar}`);
     setupSection.style.display = 'none'; // Hide the setup section
     gameSection.style.display = 'block'; // Show the game section
 
@@ -86,18 +84,15 @@ startGameBtn.addEventListener('click', () => {
     // Assign random car to AI
     const randomCarIndex = Math.floor(Math.random() * carOptions.length) + 1;
     aiCar.style.backgroundImage = `url('images/vehicles/car-${randomCarIndex}.svg')`;
-    console.log(`AI assigned car: car-${randomCarIndex}`);
-    
-    // Display Player and AI Names
+
     displayNames();
 });
-
 
 // Display Player and AI Names
 function displayNames() {
     const playerNameDisplay = document.createElement('div');
     playerNameDisplay.id = 'player-name-display';
-    playerNameDisplay.textContent = `${playerName}`;
+    playerNameDisplay.textContent = playerName;
     playerCar.appendChild(playerNameDisplay);
 
     const aiNameDisplay = document.createElement('div');
@@ -106,75 +101,117 @@ function displayNames() {
     aiCar.appendChild(aiNameDisplay);
 }
 
-// Rock Paper Scissors Logic
-document.querySelectorAll('.rps-option').forEach((option) => {
+// RPS Choice Handling
+rpsOptions.forEach((option) => {
     option.addEventListener('click', () => {
-        const playerChoice = option.dataset.choice;
-        console.log(`Player chose: ${playerChoice}`);
+        rpsOptions.forEach((opt) => opt.classList.remove('selected'));
+        option.classList.add('selected');
+        playerChoice = option.dataset.choice; // Store the player's choice
 
-        // AI makes a random choice
-        const aiChoices = ['rock', 'paper', 'scissor'];
-        const aiChoice = aiChoices[Math.floor(Math.random() * aiChoices.length)];
-        console.log(`AI chose: ${aiChoice}`);
-
-        // Determine Winner
-        const result = determineWinner(playerChoice, aiChoice);
-        if (result === 'player') {
-            playerWins++;
-            console.log('Player wins this round!');
-            moveCar(playerCar, playerWins);
-        } else if (result === 'ai') {
-            aiWins++;
-            console.log('AI wins this round!');
-            moveCar(aiCar, aiWins);
-        } else {
-            console.log('This round is a tie.');
-        }
-
-        // Check if there's a winner
-        checkForWinner();
+        processRPSRound();
     });
 });
 
+// Process RPS Round
+function processRPSRound() {
+    // AI makes a random choice
+    const aiChoices = ['rock', 'paper', 'scissor'];
+    aiChoice = aiChoices[Math.floor(Math.random() * aiChoices.length)];
+
+    displayChosenHands();
+
+    // Determine Winner
+    const result = determineWinner(playerChoice, aiChoice);
+    if (result === 'player') {
+        playerWins++;
+        moveCar(playerCar, playerWins);
+    } else if (result === 'ai') {
+        aiWins++;
+        moveCar(aiCar, aiWins);
+    }
+
+    checkForWinner();
+
+    // Reset choices for the next round
+    setTimeout(() => {
+        resetHandsDisplay();
+        rpsOptions.forEach((opt) => opt.classList.remove('selected'));
+        playerChoice = null;
+        aiChoice = null;
+    }, 2000); // Add a delay before resetting for better visual feedback
+}
+
+// Display Chosen Hands
+function displayChosenHands() {
+    const chosenHandsContainer = document.getElementById('race-track');
+    playerHandDisplay.src = `images/choices/${playerChoice}-left.png`;
+    aiHandDisplay.src = `images/choices/${aiChoice}-right.png`;
+    playerHandDisplay.className = 'big-hand';
+    aiHandDisplay.className = 'big-hand';
+    chosenHandsContainer.appendChild(playerHandDisplay);
+    chosenHandsContainer.appendChild(aiHandDisplay);
+}
+
+// Reset Hands Display
+function resetHandsDisplay() {
+    playerHandDisplay.remove();
+    aiHandDisplay.remove();
+}
+
 // Determine Winner Function
 function determineWinner(player, ai) {
-    if (player === ai) {
-        console.log('It\'s a tie!');
-        return 'tie';
-    }
+    if (player === ai) return 'tie';
     if (
         (player === 'rock' && ai === 'scissor') ||
         (player === 'paper' && ai === 'rock') ||
         (player === 'scissor' && ai === 'paper')
     ) {
-        console.log('Player wins the comparison.');
         return 'player';
     }
-    console.log('AI wins the comparison.');
     return 'ai';
 }
 
 // Move Car Forward
 function moveCar(car, wins) {
-    car.style.left = `${10 + wins * 8}%`; // Move car forward based on wins
-    console.log(`${car.id} moved forward to ${10 + wins * 8}%.`);
+    const percentage = 10 + wins * 8; // Cap movement at 100%
+    car.style.left = `${percentage}%`; // Move car forward
 }
 
 // Check for Winner
 function checkForWinner() {
-    if (playerWins === 10) {
-        console.log('Player has reached 10 wins!');
-        alert('Congratulations! You win the race!');
-        resetGame();
-    } else if (aiWins === 10) {
-        console.log('AI has reached 10 wins!');
-        alert('AI wins the race. Better luck next time!');
-        resetGame();
+    if (playerWins === totalSets) {
+        setTimeout(() => {
+            moveCar(playerCar, totalSets + 1); // Move one step past the finish line
+            displayWinnerMessage(`${playerName} has won the race!`);
+        }, 1000);
+    } else if (aiWins === totalSets) {
+        setTimeout(() => {
+            moveCar(aiCar, totalSets + 1); // Move one step past the finish line
+            displayWinnerMessage('Computer has won the race!');
+        }, 1000);
     }
+}
+
+// Display Winner Message
+function displayWinnerMessage(message) {
+    // Remove chosen hands
+    resetHandsDisplay();
+
+    // Create and display the winner message
+    const gameSection = document.getElementById('game');
+    const winnerMessage = document.createElement('div');
+    winnerMessage.id = 'winner-message';
+    winnerMessage.textContent = message;
+    
+    gameSection.appendChild(winnerMessage);
+
+    // Restart game after a delay
+    setTimeout(() => {
+        resetGame();
+    }, 5000); // 5-second delay before resetting
 }
 
 // Reset Game
 function resetGame() {
-    console.log('Game is resetting.');
     location.reload(); // Reload the page to reset the game
 }
