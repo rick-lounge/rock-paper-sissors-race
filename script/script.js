@@ -180,12 +180,35 @@ function moveCar(car, wins) {
 // Check for Winner
 function checkForWinner() {
     if (playerWins === totalSets) {
-        alert(`${playerName} has crossed the finish line and won the race!`);
-        resetGame();
+        setTimeout(() => {
+            moveCar(playerCar, totalSets + 1); // Move one step past the finish line
+            displayWinnerMessage(`${playerName} has won the race!`);
+        }, 1000);
     } else if (aiWins === totalSets) {
-        alert('Computer has crossed the finish line and won the race!');
-        resetGame();
+        setTimeout(() => {
+            moveCar(aiCar, totalSets + 1); // Move one step past the finish line
+            displayWinnerMessage('Computer has won the race!');
+        }, 1000);
     }
+}
+
+// Display Winner Message
+function displayWinnerMessage(message) {
+    // Remove chosen hands
+    resetHandsDisplay();
+
+    // Create and display the winner message
+    const gameSection = document.getElementById('game');
+    const winnerMessage = document.createElement('div');
+    winnerMessage.id = 'winner-message';
+    winnerMessage.textContent = message;
+    
+    gameSection.appendChild(winnerMessage);
+
+    // Restart game after a delay
+    setTimeout(() => {
+        resetGame();
+    }, 5000); // 5-second delay before resetting
 }
 
 // Reset Game

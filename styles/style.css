@@ -185,6 +185,11 @@ h2, button {
 }
 
 /* Game Section */
+#game {
+    position: relative; /* Ensure elements can be positioned absolutely */
+    overflow: hidden;  /* Prevent scrollbars */
+    z-index: 1;
+}
 
 /* Choices */
 #choices {
@@ -284,4 +289,18 @@ h2, button {
     width: 80px; /* Adjust size */
     height: auto; /* Maintain aspect ratio */
     z-index: 1; /* Ensure it overlays the background but under cars */
+}
+
+#winner-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 40px;
+    border-radius: 10px;
+    z-index: 5;
+    font-family: 'Jersey 15', serif;
 }
