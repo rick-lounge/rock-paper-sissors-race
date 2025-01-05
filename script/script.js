@@ -82,7 +82,11 @@ startGameBtn.addEventListener('click', () => {
     playerCar.style.backgroundImage = `url('images/vehicles/${selectedCar}.svg')`;
 
     // Assign random car to AI
-    const randomCarIndex = Math.floor(Math.random() * carOptions.length) + 1;
+    let randomCarIndex;
+    do {
+        randomCarIndex = Math.floor(Math.random() * carOptions.length) + 1;
+    } while (`car-${randomCarIndex}` === selectedCar);
+    
     aiCar.style.backgroundImage = `url('images/vehicles/car-${randomCarIndex}.svg')`;
 
     displayNames();
@@ -125,7 +129,7 @@ rpsOptions.forEach((option) => {
     option.addEventListener('click', () => {
         rpsOptions.forEach((opt) => opt.classList.remove('selected'));
         option.classList.add('selected');
-        playerChoice = option.dataset.choice; // Store the player's choice
+        playerChoice = option.dataset.choice;
 
         processRPSRound();
     });
