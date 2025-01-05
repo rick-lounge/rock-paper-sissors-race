@@ -103,23 +103,20 @@ h2, button {
 }
 
 /* Settings Button */
-.settings-button {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 15px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    z-index: 10;
+/* Settings Icon */
+.settings-icon {
+    position: fixed; /* Keeps it visible in the same place */
+    top: 10px; /* Adjust for your layout */
+    right: 10px; /* Adjust for your layout */
+    width: 40px; /* Adjust size */
+    height: 40px; /* Adjust size */
+    cursor: pointer; /* Indicates it's clickable */
+    z-index: 1000; /* Ensure it layers above other content */
+    transition: transform 0.2s ease-in-out;
 }
 
-.settings-button:hover {
-    background-color: #007BFF;
+.settings-icon:hover {
+    transform: scale(1.2); /* Slightly enlarge on hover */
 }
 
 /* Settings Menu */
