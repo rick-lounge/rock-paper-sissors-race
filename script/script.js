@@ -13,7 +13,7 @@ const carOptions = document.querySelectorAll('.car-option');
 const startGameBtn = document.getElementById('start-game');
 const playerCar = document.getElementById('player-car');
 const aiCar = document.getElementById('ai-car');
-let selectedCar = null; // Stores the player's selected car
+let selectedCar = null; 
 let playerWins = 0;
 let aiWins = 0;
 
@@ -22,12 +22,12 @@ const totalSets = 10;
 
 // Capture Player's Name
 const playerNameInput = document.getElementById('player-name');
-let playerName = ''; // Store the player's name
+let playerName = ''; 
 
 // RPS Options and State
 const rpsOptions = document.querySelectorAll('.rps-option');
-let playerChoice = null; // Stores the player's choice
-let aiChoice = null; // Stores the AI's choice
+let playerChoice = null; 
+let aiChoice = null;
 
 // Hands Display
 const playerHandDisplay = document.createElement('img');
@@ -35,36 +35,54 @@ const aiHandDisplay = document.createElement('img');
 playerHandDisplay.id = 'player-hand-display';
 aiHandDisplay.id = 'ai-hand-display';
 
+// Sound Effects
+const clickSound = new Audio('sounds/click.mp3');
+const homeBgSound = new Audio('sounds/home-bg.mp3');
+const victorySound = new Audio('sounds/victory.mp3');
+const gameOverSound = new Audio('sounds/game-over.mp3');
+
+// Set home background sound to loop
+homeBgSound.loop = true;
+
+// Play background sound on homepage load
+homeBgSound.play();
+
 // Handle "Play" Button Click
 startBtn.addEventListener('click', () => {
-    homeSection.style.display = 'none'; // Hide the home section
-    setupSection.style.display = 'block'; // Show the setup section
+    clickSound.play();
+    homeBgSound.pause(); 
+    homeSection.style.display = 'none'; 
+    setupSection.style.display = 'block';
 });
 
 // Handle "How to Play" Button Click
 howToPlayBtn.addEventListener('click', () => {
-    landingContent.style.display = 'none'; // Hide Play and How to Play buttons
-    instructions.style.display = 'block'; // Show the instructions overlay
+    clickSound.play();
+    landingContent.style.display = 'none'; 
+    instructions.style.display = 'block'; 
 });
 
 // Handle "Back" Button Click
 backBtn.addEventListener('click', () => {
-    instructions.style.display = 'none'; // Hide instructions
-    landingContent.style.display = 'flex'; // Show Play and How to Play buttons
+    clickSound.play();
+    instructions.style.display = 'none'; 
+    landingContent.style.display = 'flex';
 });
 
 // Car Selection
 carOptions.forEach((car) => {
     car.addEventListener('click', () => {
+        clickSound.play();
         carOptions.forEach((c) => c.classList.remove('selected'));
         car.classList.add('selected');
-        selectedCar = car.dataset.car; // Update selectedCar
+        selectedCar = car.dataset.car; 
     });
 });
 
 // Start Game
 startGameBtn.addEventListener('click', () => {
-    playerName = playerNameInput.value.trim(); // Get and trim player's name input
+    clickSound.play();
+    playerName = playerNameInput.value.trim();
 
     if (!playerName) {
         showSetupMessage('Please enter your name!', setupSection);
@@ -75,8 +93,8 @@ startGameBtn.addEventListener('click', () => {
         return;
     }
 
-    setupSection.style.display = 'none'; // Hide the setup section
-    gameSection.style.display = 'block'; // Show the game section
+    setupSection.style.display = 'none'; 
+    gameSection.style.display = 'block'; 
 
     // Assign selected car to player
     playerCar.style.backgroundImage = `url('images/vehicles/${selectedCar}.svg')`;
@@ -94,18 +112,13 @@ startGameBtn.addEventListener('click', () => {
 
 // Show Setup Message
 function showSetupMessage(message, container) {
-    // Check if a message is already displayed
-    if (document.getElementById('setup-message')) {
-        return;
-    }
+    if (document.getElementById('setup-message')) return;
 
-    // Create the message element
     const messageDiv = document.createElement('div');
     messageDiv.id = 'setup-message';
     messageDiv.textContent = message;
     container.appendChild(messageDiv);
 
-    // Automatically hide the message after 3 seconds
     setTimeout(() => {
         messageDiv.remove();
     }, 3000);
@@ -127,6 +140,7 @@ function displayNames() {
 // RPS Choice Handling
 rpsOptions.forEach((option) => {
     option.addEventListener('click', () => {
+        clickSound.play();
         rpsOptions.forEach((opt) => opt.classList.remove('selected'));
         option.classList.add('selected');
         playerChoice = option.dataset.choice;
@@ -137,13 +151,11 @@ rpsOptions.forEach((option) => {
 
 // Process RPS Round
 function processRPSRound() {
-    // AI makes a random choice
     const aiChoices = ['rock', 'paper', 'scissor'];
     aiChoice = aiChoices[Math.floor(Math.random() * aiChoices.length)];
 
     displayChosenHands();
 
-    // Determine Winner
     const result = determineWinner(playerChoice, aiChoice);
     if (result === 'player') {
         playerWins++;
@@ -155,13 +167,12 @@ function processRPSRound() {
 
     checkForWinner();
 
-    // Reset choices for the next round
     setTimeout(() => {
         resetHandsDisplay();
         rpsOptions.forEach((opt) => opt.classList.remove('selected'));
         playerChoice = null;
         aiChoice = null;
-    }, 2000); // Add a delay before resetting for better visual feedback
+    }, 2000);
 }
 
 // Display Chosen Hands
@@ -196,20 +207,22 @@ function determineWinner(player, ai) {
 
 // Move Car Forward
 function moveCar(car, wins) {
-    const percentage = 10 + wins * 8; // Cap movement at 100%
-    car.style.left = `${percentage}%`; // Move car forward
+    const percentage = 10 + wins * 8;
+    car.style.left = `${percentage}%`;
 }
 
 // Check for Winner
 function checkForWinner() {
     if (playerWins === totalSets) {
+        victorySound.play();
         setTimeout(() => {
-            moveCar(playerCar, totalSets + 1); // Move one step past the finish line
+            moveCar(playerCar, totalSets + 1);
             displayWinnerMessage(`${playerName} has won the race!`);
         }, 1000);
     } else if (aiWins === totalSets) {
+        gameOverSound.play();
         setTimeout(() => {
-            moveCar(aiCar, totalSets + 1); // Move one step past the finish line
+            moveCar(aiCar, totalSets + 1);
             displayWinnerMessage('Computer has won the race!');
         }, 1000);
     }
@@ -217,24 +230,20 @@ function checkForWinner() {
 
 // Display Winner Message
 function displayWinnerMessage(message) {
-    // Remove chosen hands
     resetHandsDisplay();
 
-    // Create and display the winner message
     const gameSection = document.getElementById('game');
     const winnerMessage = document.createElement('div');
     winnerMessage.id = 'winner-message';
     winnerMessage.textContent = message;
-    
     gameSection.appendChild(winnerMessage);
 
-    // Restart game after a delay
     setTimeout(() => {
         resetGame();
-    }, 5000); // 5-second delay before resetting
+    }, 5000);
 }
 
 // Reset Game
 function resetGame() {
-    location.reload(); // Reload the page to reset the game
+    location.reload();
 }
