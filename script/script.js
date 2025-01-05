@@ -67,11 +67,11 @@ startGameBtn.addEventListener('click', () => {
     playerName = playerNameInput.value.trim(); // Get and trim player's name input
 
     if (!playerName) {
-        alert('Please enter your name!');
+        showSetupMessage('Please enter your name!', setupSection);
         return;
     }
     if (!selectedCar) {
-        alert('Please select a car!');
+        showSetupMessage('Please select a car!', setupSection);
         return;
     }
 
@@ -87,6 +87,25 @@ startGameBtn.addEventListener('click', () => {
 
     displayNames();
 });
+
+// Show Setup Message
+function showSetupMessage(message, container) {
+    // Check if a message is already displayed
+    if (document.getElementById('setup-message')) {
+        return;
+    }
+
+    // Create the message element
+    const messageDiv = document.createElement('div');
+    messageDiv.id = 'setup-message';
+    messageDiv.textContent = message;
+    container.appendChild(messageDiv);
+
+    // Automatically hide the message after 3 seconds
+    setTimeout(() => {
+        messageDiv.remove();
+    }, 3000);
+}
 
 // Display Player and AI Names
 function displayNames() {
