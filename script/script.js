@@ -76,6 +76,7 @@ function addInteractionListener() {
     document.addEventListener('keydown', userInteraction);
 }
 
+
 // Ensure background music plays automatically when the game starts
 autoplayBackgroundMusic();
 

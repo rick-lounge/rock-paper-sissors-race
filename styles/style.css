@@ -105,18 +105,18 @@ h2, button {
 /* Settings Button */
 /* Settings Icon */
 .settings-icon {
-    position: fixed; /* Keeps it visible in the same place */
-    top: 10px; /* Adjust for your layout */
-    right: 10px; /* Adjust for your layout */
-    width: 40px; /* Adjust size */
-    height: 40px; /* Adjust size */
-    cursor: pointer; /* Indicates it's clickable */
-    z-index: 1000; /* Ensure it layers above other content */
+    position: fixed;
+    top: 10px; 
+    right: 10px; 
+    width: 40px; 
+    height: 40px; 
+    cursor: pointer;
+    z-index: 1000; 
     transition: transform 0.2s ease-in-out;
 }
 
 .settings-icon:hover {
-    transform: scale(1.2); /* Slightly enlarge on hover */
+    transform: scale(1.2);
 }
 
 /* Settings Menu */
