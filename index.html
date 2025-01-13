@@ -34,11 +34,34 @@
                 </p>
                 <button id="back-btn">Back</button>
             </div>
+            <!-- Settings Button -->
+            <img id="settings-btn" src="images/settings-icon.png" alt="Settings" class="settings-icon">
+
+            <!-- Settings Menu -->
+            <div id="settings-menu" class="settings-menu" style="display: none;">
+                <h2>Settings</h2>
+                <label for="bg-music-toggle">
+                    <input type="checkbox" id="bg-music-toggle" checked>
+                    Background Music
+                </label>
+                <br>
+                <label for="sound-effects-toggle">
+                    <input type="checkbox" id="sound-effects-toggle" checked>
+                    Sound Effects
+                </label>
+                <br>
+                <button id="close-settings-btn" class="close-settings-button">Close</button>
+            </div>
         </section>
 
         <!-- Setup Section -->
         <section id="setup" style="display: none;">
             <h2>Choose Your Car</h2>
+            <div id="player-name-input">
+                <label for="player-name" class="player-name">Enter Your Name:</label>
+                <input type="text" id="player-name" placeholder="Your Name">
+            </div>
+
             <div id="car-selection">
                 <img src="images/vehicles/car-1.svg" alt="Car 1" class="car-option" data-car="car-1">
                 <img src="images/vehicles/car-2.svg" alt="Car 2" class="car-option" data-car="car-2">
@@ -57,10 +80,15 @@
                 <img src="images/choices/paper-left.png" alt="Paper" class="rps-option" data-choice="paper">
                 <img src="images/choices/scissor-left.png" alt="Scissor" class="rps-option" data-choice="scissor">
             </div>
+            <div id="chosen-hands">
+                <img id="player-hand" src="" alt="Player Hand" style="display: none;">
+                <img id="ai-hand" src="" alt="AI Hand" style="display: none;">
+            </div>
             <div id="race-track">
                 <img src="images/bg/game-background.jpg" alt="Race Track Background" id="road">
                 <div id="player-car" class="car"></div>
                 <div id="ai-car" class="car"></div>
+                <img src="images/finish-line.png" alt="Finish Line" id="finish-line">
             </div>
         </section>
     </main>
